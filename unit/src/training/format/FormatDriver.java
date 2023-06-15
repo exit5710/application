@@ -13,6 +13,5 @@ public class FormatDriver {
 		data = data.replaceAll("&", ", ");
 
 		System.out.println(data);
-
 	}
 }
