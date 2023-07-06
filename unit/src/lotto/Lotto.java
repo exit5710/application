@@ -16,6 +16,7 @@ public class Lotto {
 
 			if (this.lottoNumber.size() == 6) {
 				this.lottoNumber.sort(null);
+
 				break;
 			}
 		}
