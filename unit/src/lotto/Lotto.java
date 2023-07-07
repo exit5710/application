@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Lotto {
 	private ArrayList<Integer> lottoNumber = new ArrayList<>();
 
+	//lottoNumber 번호 add
 	private void setLottoNumber() {
 		while (true) {
 			double randomNumber = Math.random();
@@ -22,6 +23,7 @@ public class Lotto {
 		}
 	}
 
+	// 중복번호 체크
 	private boolean checkOverlap(int lottoNumber) {
 		for (Integer integer : this.lottoNumber) {
 			if (integer == lottoNumber) {
@@ -32,6 +34,7 @@ public class Lotto {
 		return false;
 	}
 
+	// 번호 출력
 	private void printLottoNumber() {
 		StringBuilder lottoNumber = new StringBuilder();
 
