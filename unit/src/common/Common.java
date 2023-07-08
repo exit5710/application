@@ -35,10 +35,11 @@ public class Common {
 				maxValue = value;
 			}
 		}
+
 		return maxValue;
 	}
 
-	public static boolean isNumeric(String value) {
+	private static boolean isNumeric(String value) {
 		// value.matches("[+-]?\\d*(\\.\\d+)?");
 		boolean bool = true;
 
