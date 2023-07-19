@@ -46,6 +46,7 @@ public class Lotto {
 		System.out.print(lottoNumber.toString().trim() + "\n");
 	}
 
+	// main method
 	public static void main(String[] args) {
 		Lotto lotto = new Lotto();
 
