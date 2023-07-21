@@ -1,3 +1,5 @@
+package resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,8 +16,8 @@ public class ResourceRead {
 	public static void main(String[] args) {
 		logger.info(String.valueOf(clazz));
 		// C:\java\IdeaProjects\webApp\out\artifacts\spring5fs_war_exploded\WEB-INF\classes\dataBaseInfo.properties
-		// String path = Test.class.getResource("dataBaseInfo.properties").getPath();
-		String path = clazz.getResource("dataBaseInfo.properties").getPath();
+		// String path = ResourceRead.class.getResource("dataBaseInfo.properties").getPath();
+		String path = clazz.getResource("../dataBaseInfo.properties").getPath();
 
 		try {
 			FileReader resources = new FileReader(path);
