@@ -1,4 +1,4 @@
-package unicode;
+package unitApp.unicode;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
