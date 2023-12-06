@@ -1,4 +1,4 @@
-package resource;
+package unitApp.resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,14 +10,14 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ResourceRead {
-	private static final Class<?> clazz = MethodHandles.lookup().lookupClass();
-	private static final Logger logger = LoggerFactory.getLogger(clazz);
+	private static final Class<?> thisClass = MethodHandles.lookup().lookupClass();
+	private static final Logger logger = LoggerFactory.getLogger(thisClass);
 
 	public static void main(String[] args) {
-		logger.info(String.valueOf(clazz));
+		logger.info(String.valueOf(thisClass));
 		// C:\java\IdeaProjects\webApp\out\artifacts\spring5fs_war_exploded\WEB-INF\classes\dataBaseInfo.properties
 		// String path = ResourceRead.class.getResource("dataBaseInfo.properties").getPath();
-		String path = clazz.getResource("../dataBaseInfo.properties").getPath();
+		String path = thisClass.getResource("../dataBaseInfo.properties").getPath();
 
 		try {
 			FileReader resources = new FileReader(path);
