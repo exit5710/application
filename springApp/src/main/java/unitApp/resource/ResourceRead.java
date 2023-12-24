@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Set;
 
 public class ResourceRead {
 	private static final Class<?> thisClass = MethodHandles.lookup().lookupClass();
@@ -32,6 +33,11 @@ public class ResourceRead {
 			logger.info("url : " + url);
 			logger.info("user : " + user);
 			logger.info("password : " + password);
+
+			Set<String> keys = properties.stringPropertyNames();
+			for (String key : keys) {
+				logger.info(key);
+			}
 
 			throw new SQLException();
 		} catch (IOException | SQLException e) {
