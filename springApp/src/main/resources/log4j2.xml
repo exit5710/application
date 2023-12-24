@@ -3,7 +3,7 @@
 	<!-- properties -->
 	<properties>
 		<property name="layoutPattern">%green{%d{yyyy-MM-dd HH:mm:ss}} %highlight{%5level}{FATAL=bg_red, ERROR=#E9063B, WARN=#EB7428, INFO=#EFDBC5, DEBUG=blue} %magenta{%-4relative} &#45;&#45; [ %thread ] %cyan{%logger} : %yellow{%msg%n}</property>
-		<property name="logPath">../logs/springApp</property>
+		<property name="logPath">./../../logs/application/springApp</property>
 	</properties>
 
 	<!-- appenders -->
@@ -19,18 +19,20 @@
 			<fileName>${logPath}/log_${date:yyyy}-${date:MM}-${date:dd}.log</fileName>
 			-->
 			<fileName>${logPath}/app.log</fileName>
+			<!--
 			<filePattern>${logPath}/${date:yyyy-MM}/dailyLog_%d{yyyy-MM-dd}_%i.log</filePattern>
+			-->
+			<filePattern>${logPath}/dailyLog_%d{yyyy-MM-dd}_%i.log</filePattern>
 			<patternLayout>
 				<pattern>%d{yyyy-MM-dd HH:mm:ss} %5level %-4relative - [ %thread ] %logger &#45;&#45; %msg %n</pattern>
 			</patternLayout>
 			<policies>
-				<sizeBasedTriggeringPolicy size="30MB" />
 				<timeBasedTriggeringPolicy interval="1" modulate="true" />
+				<sizeBasedTriggeringPolicy size="30MB" />
 			</policies>
-			<defaultRolloverStrategy>
-				<delete basePath="${logPath}">
+			<defaultRolloverStrategy max="2" fileIndex="max">
+				<delete basePath="${logPath}" maxDepth="1">
 					<ifFileName glob="*.log" />
-					<ifLastModified age="30d" />
 				</delete>
 			</defaultRolloverStrategy>
 		</rollingFile>
