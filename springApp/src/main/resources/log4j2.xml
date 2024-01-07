@@ -30,9 +30,9 @@
 				<timeBasedTriggeringPolicy interval="1" modulate="true" />
 				<sizeBasedTriggeringPolicy size="30MB" />
 			</policies>
-			<defaultRolloverStrategy max="2" fileIndex="max">
+			<defaultRolloverStrategy>
 				<delete basePath="${logPath}" maxDepth="1">
-					<ifFileName glob="*.log" />
+					<ifAccumulatedFileCount exceeds="10"/>
 				</delete>
 			</defaultRolloverStrategy>
 		</rollingFile>
@@ -42,8 +42,8 @@
 		<!-- application loggers -->
 		<logger name="org.springframework" level="debug" />
 
-		<!--
 		<logger name="jdbc.sqlonly" level="info" />
+		<!--
 		<logger name="jdbc.audit" level="warn" />
 		<logger name="jdbc.sqltiming" level="warn" />
 		<logger name="jdbc.resultset" level="warn" />
