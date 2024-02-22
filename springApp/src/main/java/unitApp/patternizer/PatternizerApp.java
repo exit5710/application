@@ -26,16 +26,16 @@ public class PatternizerApp {
 		list.add("/* this is comment \n" + "test 111 */");
 
 		for (String element : list) {
-			logger.debug(processRegex(element));
+			logger.debug(processRegexp(element));
 		}
 	}
 
 	// 문자열 처리 메서드
-	public static String processRegex(String data) {
-		// #{ } 패턴 처리
+	public static String processRegexp(String data) {
+		// #{} 패턴 처리
 		data = data.replaceAll("#\\{\\w+}", "'1'");
 
-		// <![CDATA[ ]]> 패턴 처리
+		// <![CDATA[]]> 패턴 처리
 		data = data.replaceAll("<!\\[CDATA\\[|]]>", "");
 
 		// if 태그 패턴 처리
