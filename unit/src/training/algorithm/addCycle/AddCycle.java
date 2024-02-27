@@ -1,6 +1,6 @@
 package training.algorithm.addCycle;
 
-import common.Common;
+import config.Common;
 
 public class AddCycle {
 	public static void main(String[] args) {
