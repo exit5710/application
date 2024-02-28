@@ -1,6 +1,6 @@
 package training.algorithm.averageRatio;
 
-import common.Common;
+import config.Common;
 
 public class AverageRatio {
 	public static void main(String[] args) {
