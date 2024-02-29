@@ -1,6 +1,6 @@
 package training.algorithm.reverseNumber;
 
-import common.Common;
+import config.Common;
 
 public class ReverseNumber {
 	private int getReverse(int number) {
