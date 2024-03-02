@@ -1,6 +1,6 @@
 package training.algorithm.duplication;
 
-import common.Common;
+import config.Common;
 
 public class DuplicationDelete {
 	public static void main(String[] args) {
