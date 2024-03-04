@@ -18,7 +18,7 @@ public class ResourceRead {
 		logger.info(String.valueOf(thisClass));
 		// C:\java\IdeaProjects\webApp\out\artifacts\spring5fs_war_exploded\WEB-INF\classes\dataBaseInfo.properties
 		// String path = ResourceRead.class.getResource("dataBaseInfo.properties").getPath();
-		String path = thisClass.getResource("/dataBaseInfo.properties").getPath();
+		String path = thisClass.getResource("/databaseInfo.properties").getPath();
 
 		try {
 			FileReader resources = new FileReader(path);
