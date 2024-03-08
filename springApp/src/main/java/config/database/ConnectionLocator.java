@@ -6,5 +6,5 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface ConnectionLocator {
-	Connection getConnection() throws ClassNotFoundException, SQLException, IOException;
+	Connection getConnection() throws SQLException, IOException;
 }
