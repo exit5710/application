@@ -18,6 +18,13 @@ public class ValidateVo extends DefaultVo {
 		this.originalContent = originalContent;
 	}
 
+	public ValidateVo(String filePath, String originalContent, String errorMessage, String verify) {
+		this.filePath = filePath;
+		this.originalContent = originalContent;
+		this.errorMessage = errorMessage;
+		this.verify = verify;
+	}
+
 	public String getFilePath() {
 		return filePath;
 	}
