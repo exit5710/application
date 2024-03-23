@@ -211,6 +211,26 @@ public class FetcherDao {
 		}
 	}
 
+	// VALIDATE 테이블 clear
+	public void validateClear() {
+		logger.info("FetcherDao validateClear /");
+
+		StringBuilder query = new StringBuilder();
+
+		query.append("DELETE");
+		query.append("  FROM VALIDATE");
+
+		try {
+			connection = validate.getConnection();
+			ps = connection.prepareStatement(query.toString());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			logger.error("Error validateClear: {}", e.getMessage());
+		} finally {
+			Utils.databaseClose(rs, ps, connection);
+		}
+	}
+
 	// parsing db 저장
 	public void insertPatternizerList(ValidateVo vo) {
 		logger.info("FetcherDao insertPatternizerList /");
