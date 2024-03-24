@@ -1,5 +1,6 @@
 package unitApp.verification.fetcher.vo;
 
+@SuppressWarnings("unused")
 public class SqlTagMapperVo {
 	private String filePath;
 	private String namespace;
