@@ -2,7 +2,10 @@ package unitApp.verification.fetcher.vo;
 
 import config.vo.DefaultVo;
 
+@SuppressWarnings("unused")
 public class TableVo extends DefaultVo {
+	private static final long serialVersionUID = 1L;
+
 	private String tableName;
 	private String createTable;
 
