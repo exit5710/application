@@ -2,6 +2,7 @@ package unitApp.verification.fetcher.vo;
 
 import config.vo.DefaultVo;
 
+@SuppressWarnings("unused")
 public class ValidateVo extends DefaultVo {
 	private static final long serialVersionUID = 1L;
 
@@ -11,6 +12,10 @@ public class ValidateVo extends DefaultVo {
 	private String regexpContent;
 	private String errorMessage;
 	private String verify;
+
+	public ValidateVo(String regexpContent) {
+		this.regexpContent = regexpContent;
+	}
 
 	public ValidateVo(String filePath, String id, String originalContent) {
 		this.filePath = filePath;
