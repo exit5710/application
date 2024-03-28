@@ -13,7 +13,8 @@ public class ValidateVo extends DefaultVo {
 	private String errorMessage;
 	private String verify;
 
-	public ValidateVo(String regexpContent) {
+	public ValidateVo(String originalContent, String regexpContent) {
+		this.originalContent = originalContent;
 		this.regexpContent = regexpContent;
 	}
 
