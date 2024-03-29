@@ -2,7 +2,10 @@ package config.vo;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public class DefaultVo implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String rowStatus;
 	private String gridId;
 	private int resultCnt;
