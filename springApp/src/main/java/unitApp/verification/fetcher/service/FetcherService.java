@@ -2,6 +2,10 @@ package unitApp.verification.fetcher.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import unitApp.verification.fetcher.dao.FetcherDao;
+import unitApp.verification.fetcher.vo.SqlTagMapperVo;
+import unitApp.verification.fetcher.vo.TableVo;
+import unitApp.verification.fetcher.vo.ValidateVo;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,11 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import unitApp.verification.fetcher.dao.FetcherDao;
-import unitApp.verification.fetcher.vo.SqlTagMapperVo;
-import unitApp.verification.fetcher.vo.TableVo;
-import unitApp.verification.fetcher.vo.ValidateVo;
 
 public class FetcherService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -60,6 +59,13 @@ public class FetcherService {
 
 		// VALIDATE 테이블 생성
 		fetcherDao.executeQuery(query.toString(), tableSchema);
+	}
+
+	// VALIDATE 테이블 clear
+	public void validateClear() {
+		logger.info("FetcherService clear /");
+
+		fetcherDao.validateClear();
 	}
 
 	// 스키마 동기화 (원본 데이터 베이스, 대상 데이터 베이스)
@@ -185,6 +191,8 @@ public class FetcherService {
 
 	// collectFiles
 	private void collectFiles(File directory, String extension, List<String> fileList) {
+		logger.info("FetcherService collectFiles /");
+
 		if (directory.isDirectory()) {
 			File[] files = directory.listFiles();
 			if (files != null) {
@@ -251,6 +259,8 @@ public class FetcherService {
 
 	// getSqlContent
 	private void getSqlContent(String id, String originalContent, String content, String xmlFilePath) {
+		logger.info("FetcherService getSqlContent /");
+
 		Matcher matcher = Pattern.compile("<mapper.*?namespace=\"(.*?)\".*?>(.*?)</mapper>", Pattern.DOTALL).matcher(content);
 
 		while (matcher.find()) {
@@ -269,7 +279,7 @@ public class FetcherService {
 			String content = vo.getOriginalContent();
 			String regexpContent = processRegexp(content);
 
-			vo.setRegexpContent(regexpContent);
+			vo.setRegexpContent(deleteEmptyLine(regexpContent));
 		}
 
 		return xmlParsingList;
@@ -277,6 +287,8 @@ public class FetcherService {
 
 	// include parsing
 	private void includeParsing(List<ValidateVo> patternizerList) {
+		logger.info("FetcherService includeParsing /");
+
 		for (ValidateVo validateVo : patternizerList) {
 			while (validateVo.getRegexpContent().contains("include")) {
 				validateVo.setRegexpContent(validateVo.getRegexpContent().replaceAll("<include refid=\"(\\w+)\"></include>", "<include refid=\"$1\"/>"));
@@ -298,8 +310,25 @@ public class FetcherService {
 				}
 			}
 
-			validateVo.setRegexpContent(processRegexp(validateVo.getRegexpContent()));
+			validateVo.setRegexpContent(deleteEmptyLine(processRegexp(validateVo.getRegexpContent())));
 		}
+	}
+
+	// deleteEmptyLine
+	private String deleteEmptyLine(String regexpContent) {
+		logger.info("FetcherService deleteEmptyLine /");
+
+		StringBuilder sb = new StringBuilder();
+		String[] lines = regexpContent.split("\r\n|\r|\n");
+
+		for (String line : lines) {
+			if (!line.trim().isEmpty()) {
+				sb.append(line);
+				sb.append("\n");
+			}
+		}
+
+		return sb.toString();
 	}
 
 	// processRegexp
@@ -308,7 +337,7 @@ public class FetcherService {
 
 		// 주석 패턴 처리
 		data = data.replaceAll("//.*", "");
-		data = data.replaceAll("\\s+", " ");
+		// data = data.replaceAll("\\s+", " ");
 		data = data.replaceAll("/\\*.*?\\*/", "");
 		data = data.replaceAll("<!--[^>]*-->", "");
 

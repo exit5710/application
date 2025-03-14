@@ -1,12 +1,13 @@
 package unitApp.verification.fetcher.dao;
 
-import config.database.ReflectConnector;
 import config.component.Utils;
 import config.database.ConnectionLocator;
 import config.database.DatabaseLocator;
-
+import config.database.reflection.ReflectionConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import unitApp.verification.fetcher.vo.TableVo;
+import unitApp.verification.fetcher.vo.ValidateVo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import unitApp.verification.fetcher.vo.TableVo;
-import unitApp.verification.fetcher.vo.ValidateVo;
 
 public class FetcherDao {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -51,7 +49,7 @@ public class FetcherDao {
 		query.append(" WHERE TABLE_SCHEMA = ?");
 
 		try {
-			connection = ReflectConnector.getConnection(tableSchema);
+			connection = ReflectionConnector.getConnection(tableSchema);
 			ps = connection.prepareStatement(query.toString());
 			ps.setString(1, tableSchema);
 			rs = ps.executeQuery();
@@ -80,7 +78,7 @@ public class FetcherDao {
 		query.append(tableName);
 
 		try {
-			connection = ReflectConnector.getConnection(targetSchema);
+			connection = ReflectionConnector.getConnection(targetSchema);
 			ps = connection.prepareStatement(query.toString());
 			rs = ps.executeQuery();
 
@@ -101,7 +99,7 @@ public class FetcherDao {
 		logger.info("FetcherDao void executeQuery /");
 
 		try {
-			connection = ReflectConnector.getConnection(targetSchema);
+			connection = ReflectionConnector.getConnection(targetSchema);
 			ps = connection.prepareStatement(executeQuery);
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -157,7 +155,7 @@ public class FetcherDao {
 		query.append("SHOW TABLES");
 
 		try {
-			connection = ReflectConnector.getConnection(tableSchema);
+			connection = ReflectionConnector.getConnection(tableSchema);
 			ps = connection.prepareStatement(query.toString());
 			rs = ps.executeQuery();
 
@@ -189,7 +187,7 @@ public class FetcherDao {
 		query.append("   AND ROUTINE_SCHEMA = ?");
 
 		try {
-			connection = ReflectConnector.getConnection(routineSchema);
+			connection = ReflectionConnector.getConnection(routineSchema);
 			ps = connection.prepareStatement(query.toString());
 			ps.setString(1, routineSchema);
 			rs = ps.executeQuery();
